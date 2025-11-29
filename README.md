@@ -125,18 +125,134 @@ If you need to redeploy manually:
 
 ## 🔒 Custom Domain Setup
 
-To connect your custom domain (e.g., `www.petoskeychiro.com`):
+### ⚠️ Migrating from WordPress/AWS
 
-1. Go to **Settings** → **Pages** in your GitHub repository
-2. Under "Custom domain", enter your domain name
-3. Add these DNS records at your domain registrar:
-   ```
-   Type: CNAME
-   Name: www
-   Value: [your-username].github.io
-   ```
-4. Wait for DNS propagation (can take up to 24 hours)
-5. Enable "Enforce HTTPS" in GitHub Pages settings
+If you're currently using WordPress hosted on AWS, follow these steps to migrate to this new static site:
+
+#### Before Making DNS Changes:
+
+1. **Backup your WordPress site** (if you need any content/images from it)
+2. **Document current DNS settings** - take screenshots of all current DNS records
+3. **Note your AWS setup** - you may want to shut down AWS resources after migration to avoid charges
+4. **Plan for downtime** - there may be a brief period during DNS propagation where the old or new site shows inconsistently
+
+#### Migration Steps:
+
+1. **Deploy the new site to GitHub Pages first** (complete the setup below)
+2. **Test the new site** at `nicolenadine.github.io/petoskeychiro` to ensure everything works
+3. **Then update DNS** to point to GitHub Pages (this switches your domain to the new site)
+4. **Wait for DNS propagation** (24-48 hours)
+5. **Verify everything works** on your custom domain
+6. **Shut down WordPress/AWS** to avoid ongoing costs
+
+#### What Happens to Email?
+
+If you have email addresses using your domain (like `info@petoskeychiro.com`):
+- **Email DNS records (MX records) are separate** - don't delete them!
+- Only change A and CNAME records related to your website
+- Keep any MX, TXT, or other records for email services
+
+---
+
+### Setting Up Your Custom Domain
+
+To connect your custom domain (e.g., `www.petoskeychiro.com` or `petoskeychiro.com`):
+
+
+### Step 1: Update DNS Settings at Your Domain Registrar
+
+You'll need to log into wherever you purchased your domain (GoDaddy, Namecheap, Google Domains, etc.) and add DNS records.
+
+#### Option A: Using a Subdomain (www.petoskeychiro.com) - RECOMMENDED
+
+Add a **CNAME record**:
+
+| Record Type | Name/Host | Value/Points To              | TTL  |
+|-------------|-----------|------------------------------|------|
+| CNAME       | www       | nicolenadine.github.io       | 3600 |
+
+**Then** add an **A record** for the apex domain (or use ALIAS/ANAME if available):
+
+| Record Type | Name/Host | Value/Points To    | TTL  |
+|-------------|-----------|-------------------|------|
+| A           | @         | 185.199.108.153   | 3600 |
+| A           | @         | 185.199.109.153   | 3600 |
+| A           | @         | 185.199.110.153   | 3600 |
+| A           | @         | 185.199.111.153   | 3600 |
+
+#### Option B: Using Apex Domain Only (petoskeychiro.com)
+
+Add **A records** (you need all 4):
+
+| Record Type | Name/Host | Value/Points To    | TTL  |
+|-------------|-----------|-------------------|------|
+| A           | @         | 185.199.108.153   | 3600 |
+| A           | @         | 185.199.109.153   | 3600 |
+| A           | @         | 185.199.110.153   | 3600 |
+| A           | @         | 185.199.111.153   | 3600 |
+
+ 
+
+### Step 2: Wait for DNS Propagation
+
+- DNS changes can take **up to 24-48 hours** to propagate worldwide
+- Most changes happen within **1-2 hours**
+- You can check status at: https://dnschecker.org
+
+
+### Troubleshooting DNS Issues
+
+**Domain not connecting:**
+- Wait longer (DNS can take up to 48 hours)
+- Make sure you deleted any old A or CNAME records for the same host
+- Verify your DNS records are exactly as shown above
+
+**"DNS check unsuccessful" error in GitHub:**
+- Wait a few more hours for propagation
+- Double-check the CNAME record points to `nicolenadine.github.io` (not the full URL)
+- Make sure there's no trailing dot in your DNS records
+
+**HTTPS not working:**
+- Wait 24 hours after DNS is working before enabling HTTPS
+- GitHub needs time to provision the SSL certificate
+- Try unchecking and re-checking "Enforce HTTPS"
+
+### After Migration: Shutting Down AWS/WordPress
+
+Once your new site is live and working on your custom domain:
+
+#### 1. Verify Everything Works
+- Test all pages on your custom domain
+- Check that blog posts load from Contentful
+- Verify contact forms work
+- Test on mobile devices
+
+#### 2. Shut Down WordPress/AWS Resources
+
+**To avoid ongoing AWS charges:**
+
+1. Log into AWS Console
+2. Go to **EC2** (if using EC2 instances)
+   - Select your WordPress instance
+   - Actions → Instance State → Terminate
+3. Go to **RDS** (if using database)
+   - Select your database
+   - Actions → Delete (consider final snapshot if needed)
+4. Go to **S3** (if storing files)
+   - Delete WordPress-related buckets (after backing up any needed files)
+5. Go to **Lightsail** (if using Lightsail)
+   - Delete the WordPress instance
+6. Check **Elastic Beanstalk**, **CloudFront**, **Route 53** for any other resources
+
+**Cost Savings:**
+- WordPress on AWS: Typically $10-50+/month
+- This static site on GitHub Pages: **$0/month** 🎉
+
+#### 3. Keep Your Domain Registration
+
+- Your domain registration is separate from hosting
+- Keep paying your domain registrar (GoDaddy, Namecheap, etc.) for the domain name itself
+- You're only eliminating hosting costs, not domain registration costs
 
 ## 👥 Team Workflow
 
