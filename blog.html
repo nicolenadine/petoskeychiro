@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Petoskey Chiropractic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4A6274;
+            --secondary: #6B8191;
+            --tertiary: #8BA0AF;
+            --quaternary: #ADB8B9;
+            --quinary: #CDD4CD;
+            --light: #EBEAE8;
+            --white: #FFFFFF;
+            --text-primary: #2C3E50;
+            --text-secondary: #5A6C7D;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 48px;
+            height: 48px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        .nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: opacity 0.2s;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            opacity: 0.8;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            border-radius: 0.5rem;
+            margin-top: 0;
+            padding-top: 0.5rem;
+            min-width: 220px;
+            z-index: 1001;
+        }
+
+        .nav-item:hover .dropdown {
+            display: block;
+        }
+
+        .dropdown a {
+            display: block;
+            padding: 0.75rem 1rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: background-color 0.2s;
+            font-size: 0.875rem;
+        }
+
+        .dropdown a:first-child {
+            border-radius: 0.5rem 0.5rem 0 0;
+        }
+
+        .dropdown a:last-child {
+            border-radius: 0 0 0.5rem 0.5rem;
+        }
+
+        .dropdown a:hover {
+            background-color: var(--light);
+        }
+
+        .book-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            background-color: var(--primary);
+            color: white;
+            text-decoration: none;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+        }
+
+        .book-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 1.5rem 3rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 1.5rem;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+            font-size: 1.25rem;
+        }
+
+        .error {
+            background-color: #fee;
+            border: 2px solid #fcc;
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            color: #c33;
+        }
+
+        .error h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .blog-card {
+            background-color: white;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 24px rgba(74, 98, 116, 0.2);
+        }
+
+        .blog-card:hover .blog-card-title {
+            color: var(--secondary);
+        }
+
+        .blog-card-image {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+            background-color: var(--light);
+        }
+
+        .blog-card-content {
+            padding: 1.5rem;
+        }
+
+        .blog-card-date {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .blog-card-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .blog-card-excerpt {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .blog-card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .tag {
+            background-color: var(--light);
+            color: var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 1rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .read-more:hover {
+            opacity: 0.7;
+        }
+
+        .no-posts {
+            text-align: center;
+            padding: 3rem;
+            color: var(--text-secondary);
+        }
+
+        .no-posts h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 0.75rem;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .modal-header {
+            position: sticky;
+            top: 0;
+            background-color: white;
+            padding: 2rem 2rem 1rem;
+            border-bottom: 1px solid var(--light);
+            z-index: 10;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+
+        .modal-close:hover {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        .modal-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            padding-right: 3rem;
+        }
+
+        .modal-date {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-body {
+            padding: 2rem;
+            line-height: 1.8;
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+        }
+
+        .modal-body p {
+            margin-bottom: 1rem;
+        }
+
+        .modal-body h2, .modal-body h3, .modal-body h4 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary);
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-body img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .modal-body a {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .modal-body a:hover {
+            opacity: 0.8;
+        }
+
+        .modal-body code {
+            background-color: var(--light);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+
+        .modal-body ul, .modal-body ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .modal-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-body blockquote {
+            border-left: 4px solid var(--primary);
+            padding-left: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .modal-body hr {
+            border: none;
+            border-top: 2px solid var(--light);
+            margin: 2rem 0;
+        }
+
+        .modal-body figure {
+            margin: 1.5rem 0;
+        }
+
+        .modal-body figcaption {
+            margin-top: 0.5rem;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-align: center;
+            font-style: italic;
+        }
+
+        .modal-tags {
+            padding: 0 2rem 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        @media (max-width: 1024px) {
+            .nav {
+                display: none;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal {
+                padding: 0;
+            }
+
+            .modal-content {
+                max-height: 100vh;
+                border-radius: 0;
+            }
+
+            .modal-title {
+                font-size: 1.75rem;
+            }
+
+            .modal-body {
+                padding: 1.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo-container">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='tealGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2317a2b8;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%230d6efd;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='100' cy='100' r='95' fill='white' stroke='url(%23tealGrad)' stroke-width='3'/%3E%3Cpath d='M60,50 Q50,100 60,150 Q70,120 70,100 Q70,80 60,50' fill='url(%23tealGrad)'/%3E%3Cpath d='M140,50 Q150,100 140,150 Q130,120 130,100 Q130,80 140,50' fill='%23a8a8a8'/%3E%3Ccircle cx='100' cy='60' r='6' fill='%23a8a8a8'/%3E%3Ccircle cx='100' cy='75' r='6' fill='%23a8a8a8'/%3E%3Ccircle cx='100' cy='90' r='6' fill='%23a8a8a8'/%3E%3Ccircle cx='100' cy='105' r='6' fill='%23a8a8a8'/%3E%3Ccircle cx='100' cy='120' r='6' fill='%23a8a8a8'/%3E%3Ccircle cx='100' cy='135' r='6' fill='%23a8a8a8'/%3E%3Cpath d='M55,85 L50,90 L55,95 L50,100 L55,105' stroke='url(%23tealGrad)' stroke-width='3' fill='none'/%3E%3Cpath d='M145,85 L150,90 L145,95 L150,100 L145,105' stroke='%23a8a8a8' stroke-width='3' fill='none'/%3E%3C/svg%3E" alt="Petoskey Chiropractic Logo" class="logo-img">
+                <div class="logo-text">
+                    <div class="logo-title">PETOSKEY</div>
+                    <div class="logo-subtitle">CHIROPRACTIC</div>
+                </div>
+            </a>
+            <nav class="nav">
+                <div class="nav-item">
+                    <span class="nav-link">Services ▾</span>
+                    <div class="dropdown">
+                        <a href="chiropractic-services.html">Chiropractic Services</a>
+                        <a href="massage-therapy.html">Massage Therapy</a>
+                        <a href="active-release.html">Active Release Technique™</a>
+                        <a href="shockwave-therapy.html">Shockwave Therapy</a>
+                    </div>
+                </div>
+                <a href="new-patient-information.html" class="nav-link">New Patient Information</a>
+                <a href="about.html" class="nav-link">About ▾</a>
+                <div class="nav-item">
+                    <span class="nav-link">Resources ▾</span>
+                    <div class="dropdown">
+                        <a href="faq.html">FAQ</a>
+                        <a href="blog.html">Blog</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="https://petoskeychiro.janeapp.com" class="book-btn">Book</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1>Our Blog</h1>
+        <p>Insights and tips for your health and wellness journey</p>
+    </section>
+
+    <div class="content">
+        <div id="blogContainer">
+            <div class="loading">Loading blog posts...</div>
+        </div>
+    </div>
+
+    <!-- Blog Post Modal -->
+    <div id="blogModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+                <h1 class="modal-title" id="modalTitle"></h1>
+                <div class="modal-date" id="modalDate"></div>
+            </div>
+            <img id="modalImage" class="modal-image" style="display: none;">
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-tags" id="modalTags"></div>
+            <div id="relatedPosts" style="padding: 0 2rem 2rem; display: none;">
+                <h3 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-bottom: 1rem; border-top: 2px solid var(--light); padding-top: 2rem;">Related Posts</h3>
+                <div id="relatedPostsList" style="display: grid; gap: 1rem;"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="contentful-config.js"></script>
+    <script>
+        // Contentful SDK CDN (using the official Contentful JS SDK)
+        const CONTENTFUL_SDK = 'https://cdn.jsdelivr.net/npm/contentful@latest/dist/contentful.browser.min.js';
+
+        // Extract plain text from Rich Text field (for excerpts)
+        function extractTextFromRichText(richText) {
+            if (!richText) return '';
+            
+            // If it's already a string, return it
+            if (typeof richText === 'string') return richText;
+            
+            // If it's a Rich Text object
+            if (richText.content && Array.isArray(richText.content)) {
+                let text = '';
+                
+                function processNode(node) {
+                    if (node.nodeType === 'text') {
+                        text += node.value;
+                    } else if (node.nodeType === 'paragraph') {
+                        if (node.content) {
+                            node.content.forEach(processNode);
+                            text += '\n\n';
+                        }
+                    } else if (node.nodeType === 'heading-1' || node.nodeType === 'heading-2' || 
+                               node.nodeType === 'heading-3' || node.nodeType === 'heading-4') {
+                        if (node.content) {
+                            node.content.forEach(processNode);
+                            text += '\n\n';
+                        }
+                    } else if (node.content) {
+                        node.content.forEach(processNode);
+                    }
+                }
+                
+                richText.content.forEach(processNode);
+                return text.trim();
+            }
+            
+            return 'No content available.';
+        }
+
+        // Render Rich Text as HTML with images, links, and formatting
+        function renderRichText(richText) {
+            if (!richText) return '<p>No content available.</p>';
+            
+            // If it's already a string, return it in a paragraph
+            if (typeof richText === 'string') {
+                return `<p>${richText.replace(/\n/g, '<br>')}</p>`;
+            }
+            
+            // If it's not a Rich Text object, try to display it
+            if (!richText.content || !Array.isArray(richText.content)) {
+                return '<p>No content available.</p>';
+            }
+            
+            // Process Rich Text nodes
+            function processNode(node) {
+                if (!node) return '';
+                
+                // Text node
+                if (node.nodeType === 'text') {
+                    let text = node.value || '';
+                    
+                    // Handle marks (bold, italic, etc.)
+                    if (node.marks && node.marks.length > 0) {
+                        node.marks.forEach(mark => {
+                            if (mark.type === 'bold') {
+                                text = `<strong>${text}</strong>`;
+                            } else if (mark.type === 'italic') {
+                                text = `<em>${text}</em>`;
+                            } else if (mark.type === 'underline') {
+                                text = `<u>${text}</u>`;
+                            } else if (mark.type === 'code') {
+                                text = `<code>${text}</code>`;
+                            }
+                        });
+                    }
+                    
+                    return text;
+                }
+                
+                // Paragraph
+                if (node.nodeType === 'paragraph') {
+                    const content = node.content ? node.content.map(processNode).join('') : '';
+                    return `<p>${content}</p>`;
+                }
+                
+                // Headings
+                if (node.nodeType === 'heading-1') {
+                    const content = node.content ? node.content.map(processNode).join('') : '';
+                    return `<h2>${content}</h2>`;
+                }
+                if (node.nodeType === 'heading-2') {
+                    const content = node.content ? node.content.map(processNode).join('') : '';
+                    return `<h3>${content}</h3>`;
+                }
+                if (node.nodeType === 'heading-3') {
+                    const content = node.content ? node.content.map(processNode).join('') : '';
+                    return `<h4>${content}</h4>`;
+                }
+                
+                // Hyperlink
+                if (node.nodeType === 'hyperlink') {
+                    const content = node.content ? node.content.map(processNode).join('') : '';
+                    const url = node.data?.uri || '#';
+                    return `<a href="${url}" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: underline;">${content}</a>`;
+                }
+                
+                // Lists
+                if (node.nodeType === 'unordered-list') {
+                    const items = node.content ? node.content.map(processNode).join('') : '';
+                    return `<ul style="margin-left: 1.5rem; margin-bottom: 1rem;">${items}</ul>`;
+                }
+                if (node.nodeType === 'ordered-list') {
+                    const items = node.content ? node.content.map(processNode).join('') : '';
+                    return `<ol style="margin-left: 1.5rem; margin-bottom: 1rem;">${items}</ol>`;
+                }
+                if (node.nodeType === 'list-item') {
+                    const content = node.content ? node.content.map(processNode).join('') : '';
+                    return `<li>${content}</li>`;
+                }
+                
+                // Embedded assets (images, etc.)
+                if (node.nodeType === 'embedded-asset-block') {
+                    const assetId = node.data?.target?.sys?.id;
+                    if (assetId && window.contentfulAssets && window.contentfulAssets[assetId]) {
+                        const asset = window.contentfulAssets[assetId];
+                        const url = asset.fields?.file?.url;
+                        const title = asset.fields?.title || 'Image';
+                        const description = asset.fields?.description || '';
+                        
+                        if (url) {
+                            const fullUrl = url.startsWith('//') ? 'https:' + url : url;
+                            return `
+                                <figure style="margin: 1.5rem 0;">
+                                    <img src="${fullUrl}" alt="${title}" style="max-width: 100%; height: auto; border-radius: 0.5rem;">
+                                    ${description ? `<figcaption style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-secondary); text-align: center;">${description}</figcaption>` : ''}
+                                </figure>
+                            `;
+                        }
+                    }
+                    return '';
+                }
+                
+                // Embedded entries (related posts, etc.)
+                if (node.nodeType === 'embedded-entry-block' || node.nodeType === 'embedded-entry-inline') {
+                    const entryId = node.data?.target?.sys?.id;
+                    
+                    if (entryId && window.contentfulEntries && window.contentfulEntries[entryId]) {
+                        const entry = window.contentfulEntries[entryId];
+                        const entryTitle = entry.fields?.title || entry.fields?.name || entry.fields?.internalName || entry.fields?.caption || 'Related Content';
+                        const entryDescription = entry.fields?.shortDescription || entry.fields?.excerpt || entry.fields?.description || '';
+                        
+                        // Check for image in the entry
+                        const entryImage = entry.fields?.image || entry.fields?.media || entry.fields?.asset;
+                        const imageUrl = entryImage?.fields?.file?.url;
+                        const imageTitle = entryImage?.fields?.title || entryTitle;
+                        
+                        if (node.nodeType === 'embedded-entry-block') {
+                            // Block style - card-like display with optional image
+                            let html = '';
+                            
+                            if (imageUrl) {
+                                const fullImageUrl = imageUrl.startsWith('//') ? 'https:' + imageUrl : imageUrl;
+                                html = `
+                                    <figure style="margin: 1.5rem 0;">
+                                        <img src="${fullImageUrl}" alt="${imageTitle}" style="max-width: 100%; height: auto; border-radius: 0.5rem;">
+                                        ${entryTitle ? `<figcaption style="margin-top: 0.75rem; font-size: 1rem; color: var(--text-primary); font-weight: 600; text-align: center;">${entryTitle}</figcaption>` : ''}
+                                        ${entryDescription ? `<p style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--text-secondary); text-align: center;">${entryDescription}</p>` : ''}
+                                    </figure>
+                                `;
+                            } else {
+                                // No image - show as a card
+                                html = `
+                                    <div style="background-color: var(--light); border-radius: 0.5rem; padding: 1.5rem; margin: 1.5rem 0; border-left: 4px solid var(--primary);">
+                                        <h4 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-bottom: 0.5rem;">📎 ${entryTitle}</h4>
+                                        ${entryDescription ? `<p style="color: var(--text-secondary); font-size: 0.95rem; margin: 0;">${entryDescription}</p>` : ''}
+                                    </div>
+                                `;
+                            }
+                            
+                            return html;
+                        } else {
+                            // Inline style - simple link
+                            return `<span style="background-color: var(--light); padding: 0.2rem 0.5rem; border-radius: 0.25rem; font-size: 0.9em;">📎 ${entryTitle}</span>`;
+                        }
+                    }
+                    
+                    // Entry not available - skip it silently (it's likely unpublished)
+                    return '';
+                }
+                
+                // Entry hyperlinks (links to other entries)
+                if (node.nodeType === 'entry-hyperlink') {
+                    const entryId = node.data?.target?.sys?.id;
+                    const content = node.content ? node.content.map(processNode).join('') : 'Related Post';
+                    
+                    if (entryId && window.contentfulEntries && window.contentfulEntries[entryId]) {
+                        const entry = window.contentfulEntries[entryId];
+                        const entryTitle = entry.fields?.title || entry.fields?.name || content;
+                        return `<a href="#" onclick="event.preventDefault();" style="color: var(--primary); text-decoration: underline; cursor: help;" title="Related: ${entryTitle}">${content}</a>`;
+                    }
+                    
+                    return `<span style="color: var(--primary);">${content}</span>`;
+                }
+                
+                // Asset hyperlinks
+                if (node.nodeType === 'asset-hyperlink') {
+                    const assetId = node.data?.target?.sys?.id;
+                    const content = node.content ? node.content.map(processNode).join('') : 'Download';
+                    
+                    if (assetId && window.contentfulAssets && window.contentfulAssets[assetId]) {
+                        const asset = window.contentfulAssets[assetId];
+                        const url = asset.fields?.file?.url;
+                        if (url) {
+                            const fullUrl = url.startsWith('//') ? 'https:' + url : url;
+                            return `<a href="${fullUrl}" target="_blank" rel="noopener noreferrer" style="color: var(--primary); text-decoration: underline;">📥 ${content}</a>`;
+                        }
+                    }
+                    
+                    return content;
+                }
+                
+                // Blockquote
+                if (node.nodeType === 'blockquote') {
+                    const content = node.content ? node.content.map(processNode).join('') : '';
+                    return `<blockquote style="border-left: 4px solid var(--primary); padding-left: 1rem; margin: 1rem 0; font-style: italic; color: var(--text-secondary);">${content}</blockquote>`;
+                }
+                
+                // HR
+                if (node.nodeType === 'hr') {
+                    return '<hr style="border: none; border-top: 2px solid var(--light); margin: 2rem 0;">';
+                }
+                
+                // Default: process content if it exists
+                if (node.content) {
+                    return node.content.map(processNode).join('');
+                }
+                
+                return '';
+            }
+            
+            return richText.content.map(processNode).join('');
+        }
+
+        // Modal functions
+        function openModal(post) {
+            const modal = document.getElementById('blogModal');
+            const fields = post.fields;
+            
+            // Set title
+            document.getElementById('modalTitle').textContent = fields.title || 'Untitled';
+            
+            // Set date
+            const date = fields.publishedDate || post.sys.createdAt;
+            document.getElementById('modalDate').textContent = formatDate(date);
+            
+            // Set image
+            const modalImage = document.getElementById('modalImage');
+            const imageUrl = fields.featuredImage?.fields?.file?.url || '';
+            if (imageUrl) {
+                const fullImageUrl = imageUrl.startsWith('//') ? 'https:' + imageUrl : imageUrl;
+                modalImage.src = fullImageUrl;
+                modalImage.style.display = 'block';
+            } else {
+                modalImage.style.display = 'none';
+            }
+            
+            // Set body content - handle both plain text and Rich Text
+            const bodyField = fields.content || fields.body || fields.description || '';
+            const bodyHTML = renderRichText(bodyField);
+            document.getElementById('modalBody').innerHTML = bodyHTML;
+            
+            // Set tags
+            const tagsContainer = document.getElementById('modalTags');
+            const tags = fields.tags || [];
+            if (tags.length) {
+                tagsContainer.innerHTML = tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+                tagsContainer.style.display = 'flex';
+            } else {
+                tagsContainer.style.display = 'none';
+            }
+            
+            // Set related blog posts
+            const relatedPostsSection = document.getElementById('relatedPosts');
+            const relatedPostsList = document.getElementById('relatedPostsList');
+            const relatedBlogPosts = fields.relatedBlogPosts || [];
+            
+            if (relatedBlogPosts.length > 0) {
+                let relatedHTML = '';
+                
+                relatedBlogPosts.forEach(relatedRef => {
+                    const relatedId = relatedRef.sys?.id;
+                    if (relatedId && window.contentfulEntries && window.contentfulEntries[relatedId]) {
+                        const relatedPost = window.contentfulEntries[relatedId];
+                        const relatedTitle = relatedPost.fields?.title || 'Related Post';
+                        const relatedExcerpt = relatedPost.fields?.shortDescription || '';
+                        const relatedImage = relatedPost.fields?.featuredImage?.fields?.file?.url;
+                        const relatedSlug = relatedPost.fields?.slug || '';
+                        
+                        let imageHTML = '';
+                        if (relatedImage) {
+                            const fullImageUrl = relatedImage.startsWith('//') ? 'https:' + relatedImage : relatedImage;
+                            imageHTML = `<img src="${fullImageUrl}" alt="${relatedTitle}" style="width: 100%; height: 150px; object-fit: cover; border-radius: 0.5rem 0.5rem 0 0;">`;
+                        }
+                        
+                        relatedHTML += `
+                            <div style="background-color: white; border: 1px solid var(--light); border-radius: 0.5rem; overflow: hidden; transition: all 0.3s; cursor: pointer;" onmouseover="this.style.transform='translateY(-4px)'; this.style.boxShadow='0 4px 12px rgba(0,0,0,0.15)';" onmouseout="this.style.transform=''; this.style.boxShadow='';">
+                                ${imageHTML}
+                                <div style="padding: 1rem;">
+                                    <h4 style="font-family: 'Playfair Display', serif; color: var(--primary); margin-bottom: 0.5rem; font-size: 1.125rem;">${relatedTitle}</h4>
+                                    ${relatedExcerpt ? `<p style="color: var(--text-secondary); font-size: 0.875rem; line-height: 1.5; margin: 0;">${relatedExcerpt}</p>` : ''}
+                                </div>
+                            </div>
+                        `;
+                    }
+                });
+                
+                if (relatedHTML) {
+                    relatedPostsList.innerHTML = relatedHTML;
+                    relatedPostsSection.style.display = 'block';
+                } else {
+                    relatedPostsSection.style.display = 'none';
+                }
+            } else {
+                relatedPostsSection.style.display = 'none';
+            }
+            
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('blogModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside content
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('blogModal');
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+            
+            // Close modal on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && modal.classList.contains('active')) {
+                    closeModal();
+                }
+            });
+        });
+
+        // Load Contentful SDK dynamically
+        function loadContentfulSDK() {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = CONTENTFUL_SDK;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.head.appendChild(script);
+            });
+        }
+
+        // Format date nicely
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString('en-US', options);
+        }
+
+        // Create excerpt from content
+        function createExcerpt(text, maxLength = 150) {
+            if (!text) return '';
+            
+            // If it's a Rich Text object, extract plain text first
+            const plainText = typeof text === 'string' ? text : extractTextFromRichText(text);
+            
+            if (!plainText || plainText.length <= maxLength) return plainText;
+            return plainText.substr(0, maxLength).trim() + '...';
+        }
+
+        // Render blog posts
+        function renderBlogPosts(posts) {
+            const container = document.getElementById('blogContainer');
+            
+            if (!posts || posts.length === 0) {
+                container.innerHTML = `
+                    <div class="no-posts">
+                        <h2>No Blog Posts Yet</h2>
+                        <p>Check back soon for health and wellness tips!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const blogGrid = document.createElement('div');
+            blogGrid.className = 'blog-grid';
+
+            posts.forEach(post => {
+                const card = document.createElement('div');
+                card.className = 'blog-card';
+                
+                const fields = post.fields;
+                const imageUrl = fields.featuredImage?.fields?.file?.url || '';
+                const title = fields.title || 'Untitled';
+                const date = fields.publishedDate || post.sys.createdAt;
+                const excerpt = fields.shortDescription || createExcerpt(fields.content || '');
+                const tags = fields.tags || [];
+
+                card.innerHTML = `
+                    ${imageUrl ? `<img src="${imageUrl.startsWith('//') ? 'https:' + imageUrl : imageUrl}" alt="${title}" class="blog-card-image">` : ''}
+                    <div class="blog-card-content">
+                        <div class="blog-card-date">${formatDate(date)}</div>
+                        <h2 class="blog-card-title">${title}</h2>
+                        <p class="blog-card-excerpt">${excerpt}</p>
+                        ${tags.length ? `
+                            <div class="blog-card-tags">
+                                ${tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                            </div>
+                        ` : ''}
+                        <a href="#" class="read-more">Read More →</a>
+                    </div>
+                `;
+
+                // Add click handler to open modal
+                card.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    openModal(post);
+                });
+
+                blogGrid.appendChild(card);
+            });
+
+            container.innerHTML = '';
+            container.appendChild(blogGrid);
+        }
+
+        // Show error message
+        function showError(message) {
+            const container = document.getElementById('blogContainer');
+            container.innerHTML = `
+                <div class="error">
+                    <h3>Unable to Load Blog Posts</h3>
+                    <p>${message}</p>
+                    <p style="margin-top: 1rem; font-size: 0.9rem;">
+                        Please check your Contentful configuration in <code>contentful-config.js</code>
+                    </p>
+                </div>
+            `;
+        }
+
+        // Fetch blog posts from Contentful
+        async function fetchBlogPosts() {
+            try {
+                // Check if config exists
+                if (!window.CONTENTFUL_CONFIG) {
+                    throw new Error('Contentful configuration not found. Please set up contentful-config.js');
+                }
+
+                const { SPACE_ID, ACCESS_TOKEN, PREVIEW_TOKEN, USE_PREVIEW, CONTENT_TYPE } = window.CONTENTFUL_CONFIG;
+
+                // Determine which token to use
+                const usePreview = USE_PREVIEW && PREVIEW_TOKEN;
+                const token = usePreview ? PREVIEW_TOKEN : ACCESS_TOKEN;
+
+                if (!SPACE_ID || !token) {
+                    throw new Error('Missing Contentful credentials. Please add your Space ID and Access Token to contentful-config.js');
+                }
+
+                // Load Contentful SDK
+                await loadContentfulSDK();
+
+                // Create Contentful client
+                const clientConfig = {
+                    space: SPACE_ID,
+                    accessToken: token
+                };
+
+                // If using preview mode, set the preview host
+                if (usePreview) {
+                    clientConfig.host = 'preview.contentful.com';
+                }
+
+                const client = contentful.createClient(clientConfig);
+
+                // Fetch entries with linked content included
+                const response = await client.getEntries({
+                    content_type: CONTENT_TYPE || 'blogPost',
+                    order: '-sys.createdAt',  // Sort by creation date (newest first)
+                    include: 10  // Include up to 10 levels of linked entries/assets
+                });
+
+                // Store assets globally so embedded images can access them
+                window.contentfulAssets = {};
+                if (response.includes && response.includes.Asset) {
+                    response.includes.Asset.forEach(asset => {
+                        window.contentfulAssets[asset.sys.id] = asset;
+                    });
+                }
+
+                // Store embedded entries (for related posts, etc.)
+                window.contentfulEntries = {};
+                if (response.includes && response.includes.Entry) {
+                    response.includes.Entry.forEach(entry => {
+                        window.contentfulEntries[entry.sys.id] = entry;
+                    });
+                }
+                
+                // Also store the main blog posts themselves as entries
+                response.items.forEach(item => {
+                    window.contentfulEntries[item.sys.id] = item;
+                });
+
+                renderBlogPosts(response.items);
+
+            } catch (error) {
+                console.error('Error fetching blog posts:', error);
+                showError(error.message);
+            }
+        }
+
+        // Initialize when page loads
+        window.addEventListener('DOMContentLoaded', fetchBlogPosts);
+    </script>
+</body>
+</html>
+

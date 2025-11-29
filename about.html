@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Dr. Mee-Lynn - Petoskey Chiropractic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4A6274;
+            --secondary: #6B8191;
+            --tertiary: #8BA0AF;
+            --quaternary: #ADB8B9;
+            --quinary: #CDD4CD;
+            --light: #EBEAE8;
+            --white: #FFFFFF;
+            --text-primary: #2C3E50;
+            --text-secondary: #5A6C7D;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            background: linear-gradient(rgba(74, 98, 116, 0.5), rgba(74, 98, 116, 0.5)), 
+                        url('petoskeystone.png');
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-content {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .logo-img {
+            width: 48px;
+            height: 48px;
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .logo-subtitle {
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+        }
+
+        .nav {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+
+        .nav-link:hover {
+            opacity: 0.8;
+        }
+
+        .book-btn {
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            background: rgba(74, 98, 116, 0.9);
+            color: white;
+            text-decoration: none;
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 4px 16px rgba(74, 98, 116, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .book-btn:hover {
+            transform: scale(1.05);
+            background: rgba(74, 98, 116, 1);
+            box-shadow: 
+                0 6px 24px rgba(74, 98, 116, 0.35),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .book-btn:active {
+            transform: scale(0.98);
+        }
+
+        .hero-about {
+            margin-top: 80px;
+            padding: 5rem 1.5rem;
+            text-align: center;
+            color: white;
+            min-height: 50vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero-about h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-about p {
+            font-size: 1.375rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 5rem 1.5rem;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 1.5rem;
+            box-shadow: 
+                0 8px 32px rgba(31, 38, 135, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(74, 98, 116, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .intro-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            margin-bottom: 5rem;
+            align-items: start;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-image {
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 
+                0 12px 48px rgba(31, 38, 135, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .profile-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            opacity: 0.9;
+        }
+
+        .intro-text {
+            position: relative;
+            z-index: 1;
+        }
+
+        .intro-text h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+
+        .intro-text p {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+
+        .credentials-section {
+            background: rgba(235, 234, 232, 0.5);
+            padding: 3rem;
+            border-radius: 1.5rem;
+            margin-bottom: 5rem;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 
+                0 4px 20px rgba(31, 38, 135, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            position: relative;
+            z-index: 1;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .credentials-section:hover {
+            box-shadow: 
+                0 8px 32px rgba(31, 38, 135, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7);
+            transform: translateY(-2px);
+        }
+
+        .credentials-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .credentials-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .credential-item {
+            font-size: 1.125rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .credential-item:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+
+        .gallery-section {
+            margin-bottom: 5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .gallery-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .gallery-item {
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 
+                0 8px 32px rgba(31, 38, 135, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-8px);
+            box-shadow: 
+                0 12px 48px rgba(31, 38, 135, 0.18),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            display: block;
+            opacity: 0.9;
+        }
+
+        .cta-section {
+            background: linear-gradient(135deg, 
+                rgba(74, 98, 116, 0.9) 0%, 
+                rgba(107, 129, 145, 0.85) 100%);
+            padding: 4rem 2rem;
+            border-radius: 1.5rem;
+            text-align: center;
+            color: white;
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 8px 32px rgba(31, 38, 135, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta-section p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1.25rem 3rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            background: rgba(235, 234, 232, 0.9);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 1rem;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                110deg,
+                transparent 40%,
+                rgba(255, 255, 255, 0.6) 50%,
+                transparent 60%
+            );
+            background-size: 200% 100%;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .cta-btn:hover::before {
+            animation: shimmer 1.5s;
+            opacity: 1;
+        }
+
+        .cta-btn:hover {
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 
+                0 0 40px rgba(235, 234, 232, 0.8),
+                0 12px 48px rgba(0, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 1);
+            transform: translateY(-4px);
+        }
+
+        .cta-btn:active {
+            transform: translateY(-2px);
+        }
+
+        /* Shimmer animation */
+        @keyframes shimmer {
+            0% {
+                background-position: -200% center;
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                background-position: 200% center;
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .nav {
+                display: none;
+            }
+
+            .intro-section {
+                grid-template-columns: 1fr;
+            }
+
+            .about-content {
+                padding: 3rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="logo-container">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cdefs%3E%3ClinearGradient id='tealGrad' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%2317a2b8;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%230d6efd;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='100' cy='100' r='95' fill='white' stroke='url(%23tealGrad)' stroke-width='3'/%3E%3Cpath d='M60,50 Q50,100 60,150 Q70,120 70,100 Q70,80 60,50' fill='url(%23tealGrad)'/%3E%3Cpath d='M140,50 Q150,100 140,150 Q130,120 130,100 Q130,80 140,50' fill='%23a8a8a8'/%3E%3Ccircle cx='100' cy='60' r='6' fill='%23a8a8a8'/%3E%3Ccircle cx='100' cy='75' r='6' fill='%23a8a8a8'/%3E%3Ccircle cx='100' cy='90' r='6' fill='%23a8a8a8'/%3E%3Ccircle cx='100' cy='105' r='6' fill='%23a8a8a8'/%3E%3Ccircle cx='100' cy='120' r='6' fill='%23a8a8a8'/%3E%3Ccircle cx='100' cy='135' r='6' fill='%23a8a8a8'/%3E%3Cpath d='M55,85 L50,90 L55,95 L50,100 L55,105' stroke='url(%23tealGrad)' stroke-width='3' fill='none'/%3E%3Cpath d='M145,85 L150,90 L145,95 L150,100 L145,105' stroke='%23a8a8a8' stroke-width='3' fill='none'/%3E%3C/svg%3E" alt="Petoskey Chiropractic Logo" class="logo-img">
+                <div class="logo-text">
+                    <div class="logo-title">PETOSKEY</div>
+                    <div class="logo-subtitle">CHIROPRACTIC</div>
+                </div>
+            </a>
+            <nav class="nav">
+                <a href="https://petoskeychiro.com/services" class="nav-link">Services ▾</a>
+                <a href="new-patient-information.html" class="nav-link">New Patient Information</a>
+                <a href="about.html" class="nav-link">About ▾</a>
+                <div class="nav-item">
+                    <span class="nav-link">Resources ▾</span>
+                    <div class="dropdown">
+                        <a href="faq.html">FAQ</a>
+                        <a href="blog.html">Blog</a>
+                    </div>
+                </div>
+                <a href="contact.html" class="nav-link">Contact</a>
+                <a href="https://petoskeychiro.janeapp.com" class="book-btn">Book</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero-about">
+        <h1>Meet Dr. Mee-Lynn Bentley</h1>
+        <p>Your Partner in Holistic Health & Wellness</p>
+    </section>
+
+    <div class="about-content">
+        <section class="intro-section">
+            <div class="profile-image">
+                <img src="jess.png" alt="Dr. Mee-Lynn Bentley">
+            </div>
+            <div class="intro-text">
+                <h2>Welcome!</h2>
+                <p>I'm Dr. Mee-Lynn, and I'm thrilled to share a bit about myself with you. I wear multiple hats in life, and each role has shaped me in unique ways.</p>
+                
+                <p>Professionally, I'm a passionate chiropractor and massage therapist. My journey in holistic health began with a deep belief in the body's incredible capacity to heal itself. I'm dedicated to helping individuals achieve optimal wellness through natural, non-invasive approaches. Every adjustment, every massage stroke is aimed not just at relieving pain but at restoring balance and vitality.</p>
+                
+                <p>Beyond my practice, my greatest joy comes from being a mom to two wonderful daughters. They are my inspiration to continuously learn, grow, and strive for a balanced life. As a mother, I've learned the importance of setting an example of healthy living and resilience.</p>
+                
+                <p>Running is my sanctuary—a time when I connect with nature, clear my mind, and recharge my spirit. It's not just about miles; it's about the rhythm of breath, the beat of the pavement, and the freedom it brings.</p>
+                
+                <p>My belief in holistic health extends beyond the clinic walls. It's a lifestyle—an integration of physical, emotional, and spiritual well-being. My approach to healthcare is rooted in compassion, empathy, and a deep understanding of the intricate connections within the body. I strive to create a warm, welcoming environment where my patients feel heard, supported, and empowered on their wellness journey.</p>
+                
+                <p>Thank you for taking the time to get to know me. I look forward to joining you on your path to vibrant health and well-being.</p>
+            </div>
+        </section>
+
+        <section class="credentials-section">
+            <h2>Credentials & Certifications</h2>
+            <div class="credentials-list">
+                <div class="credential-item">Associate Degree in Medical Massage Therapy at Sanford Brown College, Collinsville</div>
+                <div class="credential-item">Doctor of Chiropractic, Cum Laude at Palmer College of Chiropractic West</div>
+                <div class="credential-item">Active Release Therapy – Full Body and Nerve Certified</div>
+                <div class="credential-item">ICPA Webster Certified – Specialized in Prenatal Care</div>
+            </div>
+        </section>
+
+        <section class="gallery-section">
+            <h2>Life Beyond the Clinic</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="family1.png" alt="Family time with my daughters">
+                </div>
+                <div class="gallery-item">
+                    <img src="family2.png" alt="Running and staying active">
+                </div>
+                <div class="gallery-item">
+                    <img src="family3.png" alt="Quality time with loved ones">
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <h2>Ready to Start Your Wellness Journey?</h2>
+            <p>Book your appointment today and experience compassionate, personalized care.</p>
+            <a href="https://petoskeychiro.janeapp.com" class="cta-btn">Schedule Your Visit</a>
+        </section>
+    </div>
+</body>
+</html>
