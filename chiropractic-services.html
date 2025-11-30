@@ -167,6 +167,171 @@
             transform: scale(0.98);
         }
 
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1002;
+        }
+
+        .hamburger span {
+            width: 28px;
+            height: 3px;
+            background: var(--primary);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(9px, 9px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(9px, -9px);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: -4px 0 20px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 1001;
+            overflow-y: auto;
+            padding-top: 80px;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .mobile-menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-nav-item {
+            border-bottom: 1px solid rgba(74, 98, 116, 0.1);
+        }
+
+        .mobile-nav-link {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .mobile-nav-link:hover,
+        .mobile-nav-link:active {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        .mobile-dropdown-toggle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 1rem 1.5rem;
+            color: var(--text-primary);
+            font-weight: 500;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+        }
+
+        .mobile-dropdown-toggle:hover,
+        .mobile-dropdown-toggle:active {
+            background-color: var(--light);
+            color: var(--primary);
+        }
+
+        .mobile-dropdown-toggle::after {
+            content: '›';
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-dropdown-toggle.active::after {
+            transform: rotate(90deg);
+        }
+
+        .mobile-dropdown {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: rgba(74, 98, 116, 0.05);
+        }
+
+        .mobile-dropdown.active {
+            max-height: 500px;
+        }
+
+        .mobile-dropdown a {
+            display: block;
+            padding: 0.875rem 1.5rem 0.875rem 2.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .mobile-dropdown a:hover,
+        .mobile-dropdown a:active {
+            background-color: rgba(74, 98, 116, 0.1);
+            color: var(--primary);
+        }
+
+        .mobile-book-btn {
+            display: block;
+            margin: 1.5rem;
+            padding: 1rem;
+            text-align: center;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 9999px;
+            font-weight: 600;
+            box-shadow: 0 4px 16px rgba(74, 98, 116, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .mobile-book-btn:hover,
+        .mobile-book-btn:active {
+            background: var(--secondary);
+            transform: scale(1.02);
+        }
+
         .hero {
             margin-top: 80px;
             padding: 5rem 1.5rem;
@@ -529,9 +694,101 @@
             }
         }
 
+        .footer {
+            padding: 2rem 1.5rem;
+            margin: 0 0 2rem 0;
+        }
+
+        .footer-container {
+            max-width: 1152px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .social-icon-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 64px;
+            height: 64px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            text-decoration: none;
+            box-shadow: 
+                0 4px 20px rgba(31, 38, 135, 0.08),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .social-icon-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                transparent 40%,
+                rgba(255, 255, 255, 0.5) 50%,
+                transparent 60%
+            );
+            background-size: 200% 200%;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border-radius: 50%;
+        }
+
+        .social-icon-link:hover::before {
+            animation: shimmer 1.5s;
+            opacity: 1;
+        }
+
+        .social-icon-link:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 
+                0 8px 32px rgba(31, 38, 135, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+        }
+
+        .social-icon {
+            width: 32px;
+            height: 32px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            z-index: 1;
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% center;
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                background-position: 200% center;
+                opacity: 0;
+            }
+        }
+
         @media (max-width: 1024px) {
             .nav {
                 display: none;
+            }
+
+            .hamburger {
+                display: flex;
             }
         }
     </style>
@@ -568,8 +825,47 @@
                 <a href="contact.html" class="nav-link">Contact</a>
                 <a href="https://petoskeychiro.janeapp.com" class="book-btn">Book</a>
             </nav>
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </header>
+
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <nav class="mobile-menu" id="mobileMenu">
+        <div class="mobile-nav-item">
+            <button class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                Services
+            </button>
+            <div class="mobile-dropdown">
+                <a href="chiropractic-services.html">Chiropractic Services</a>
+                <a href="massage-therapy.html">Massage Therapy</a>
+                <a href="active-release.html">Active Release Technique™</a>
+                <a href="shockwave-therapy.html">Shockwave Therapy</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="new-patient-information.html" class="mobile-nav-link">New Patient Information</a>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="about.html" class="mobile-nav-link">About</a>
+        </div>
+        <div class="mobile-nav-item">
+            <button class="mobile-dropdown-toggle" onclick="toggleMobileDropdown(this)">
+                Resources
+            </button>
+            <div class="mobile-dropdown">
+                <a href="faq.html">FAQ</a>
+                <a href="blog.html">Blog</a>
+            </div>
+        </div>
+        <div class="mobile-nav-item">
+            <a href="contact.html" class="mobile-nav-link">Contact</a>
+        </div>
+        <a href="https://petoskeychiro.janeapp.com" class="mobile-book-btn">Book Appointment</a>
+    </nav>
 
     <section class="hero">
         <h1>Chiropractic Services in San Jose</h1>
@@ -655,7 +951,55 @@
         </div>
     </div>
 
+    <footer class="footer">
+        <div class="footer-container">
+            <a href="https://www.facebook.com/petoskeychiro/" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="Visit our Facebook page">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="rgba(74, 98, 116, 0.7)" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                </svg>
+            </a>
+            <a href="https://www.instagram.com/petoskeychiro/" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="Visit our Instagram page">
+                <svg class="social-icon" viewBox="0 0 24 24" fill="rgba(74, 98, 116, 0.7)" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                </svg>
+            </a>
+        </div>
+    </footer>
+
     <script>
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+
+        function toggleMobileMenu() {
+            hamburger.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            mobileMenuOverlay.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        hamburger.addEventListener('click', toggleMobileMenu);
+        mobileMenuOverlay.addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu when clicking a link
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link, .mobile-dropdown a');
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (mobileMenu.classList.contains('active')) {
+                    toggleMobileMenu();
+                }
+            });
+        });
+
+        // Mobile dropdown toggle
+        function toggleMobileDropdown(button) {
+            button.classList.toggle('active');
+            const dropdown = button.nextElementSibling;
+            dropdown.classList.toggle('active');
+        }
+
+        // Collapsible toggle
         function toggleCollapsible(header) {
             const collapsible = header.parentElement;
             collapsible.classList.toggle('active');
