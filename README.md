@@ -51,8 +51,12 @@ PetoskeyChiro/
 ├── active-release.html
 ├── massage-therapy.html
 ├── shockwave-therapy.html
-├── contentful-config.js        # Contentful API configuration
-├── *.png                       # Images
+├── CNAME                       # GitHub Pages custom domain
+├── assets/
+│   ├── images/                 # Site images (incl. blog/ subfolder)
+│   └── js/
+│       └── contentful-config.js  # Contentful API configuration
+├── docs/                       # Project documentation (Contentful setup, todo, etc.)
 └── README.md                   # This file
 ```
 
@@ -64,7 +68,7 @@ This website uses Contentful as a headless CMS for managing:
 
 ### Contentful Configuration
 
-The connection to Contentful is configured in `contentful-config.js`:
+The connection to Contentful is configured in `assets/js/contentful-config.js`:
 - Space ID: `dn3t3khy3cva`
 - Access Token: Read-only delivery API token
 - Content Types: `pageBlogPost` and `teamMember`
@@ -81,9 +85,9 @@ The connection to Contentful is configured in `contentful-config.js`:
 ### For Detailed Contentful Documentation
 
 See these files for more information:
-- `CONTENTFUL-SETUP.md` - How Contentful is configured
-- `CONTENTFUL-CONTENT-MODEL.md` - Content structure
-- `README-CONTENTFUL.md` - General Contentful information
+- `docs/CONTENTFUL-SETUP.md` - How Contentful is configured
+- `docs/CONTENTFUL-CONTENT-MODEL.md` - Content structure
+- `docs/README-CONTENTFUL.md` - General Contentful information
 
 ## ✏️ Making Code Changes
 
