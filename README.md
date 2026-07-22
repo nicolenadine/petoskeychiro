@@ -81,6 +81,8 @@ The connection to Contentful is configured in `assets/js/contentful-config.js`:
 
 **No need to redeploy the website for content changes!**
 
+**Note on images:** Blog post images should be uploaded directly in Contentful (attached to the post's `featuredImage` field) — the site pulls the image URL straight from Contentful's CDN. The `assets/images/blog/` folder in this repo is leftover local storage from before the Contentful integration; it is not read by any code, so there's no need to add images there when publishing a post.
+
 ### For Detailed Contentful Documentation
 
 See these files for more information:
