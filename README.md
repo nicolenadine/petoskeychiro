@@ -90,7 +90,7 @@ See these files for more information:
 - `docs/CONTENTFUL-CONTENT-MODEL.md` - Content structure
 - `docs/README-CONTENTFUL.md` - General Contentful information
 
-## ✏️ Making Edits on GitHub.com (No Coding Experience Required)
+## ✏️ Making Edits on GitHub.com (Non-developer friendly)
 
 This section is for the marketing person or business owner who wants to make small edits — text, phone numbers, links, hours, etc. — directly through the GitHub website. No installs, no command line.
 
