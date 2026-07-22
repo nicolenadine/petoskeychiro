@@ -3,8 +3,7 @@
 A modern, professional website for Petoskey Chiropractic featuring dynamic content management through Contentful CMS.
 
 ## 🌐 Live Site
-
-[Add your live URL here once deployed]
+Https://www.petoskeychiro.com
 
 ## 📋 Project Overview
 
@@ -19,7 +18,7 @@ This is a static website that uses:
 
 1. Clone this repository:
    ```bash
-   git clone [your-repo-url]
+   git clone nicolenadine/petoskeychiro
    cd PetoskeyChiro
    ```
 
