@@ -155,6 +155,21 @@ Before starting new edits, sync your fork so you're working from the latest vers
 - Blog posts and team member bios don't go through this process — those are managed in Contentful (see above).
 - If a PR looks wrong, just close it without merging — nothing on the live site changes.
 
+## 🐞 Reporting a Problem or Requesting a Change (GitHub Issues)
+
+If you spot something wrong on the site (a typo, broken link, layout issue) or want to request a change but don't want to edit it yourself, open a GitHub Issue instead. This creates a written record that the developer can track and respond to.
+
+1. Go to https://github.com/nicolenadine/petoskeychiro/issues
+2. Click **New issue**.
+3. Give it a clear title (e.g. "Phone number wrong on Contact page" or "Please add a link to the new promo page").
+4. In the description, include:
+   - Which page it's on (a URL or page name, e.g. `contact.html` or "the Contact page")
+   - What's wrong, or what you'd like changed
+   - A screenshot if it's a visual issue (drag and drop an image directly into the description box)
+5. Click **Submit new issue**.
+
+You'll be notified by email/GitHub when there's a reply or when it's resolved. You don't need a fork or a pull request for this — just a free GitHub account and access to this repository's Issues tab.
+
 ## 👨‍💻 Making Code Changes (For Developers, Local Setup)
 
 ### To Update Design/Layout:
@@ -329,6 +344,7 @@ Once your new site is live and working on your custom domain:
 ### For Marketing Managers / Business Owner:
 - Blog posts and team member profiles: update through the Contentful web interface — no technical knowledge required, changes go live immediately.
 - Small text edits to the site itself (phone numbers, hours, wording): use the fork → edit → pull request workflow described in [✏️ Making Edits on GitHub.com](#️-making-edits-on-githubcom-no-coding-experience-required) above. No installs needed, and nothing goes live until the PR is reviewed and merged.
+- Found a bug or want a change but don't want to edit it yourself? Open a [GitHub Issue](#-reporting-a-problem-or-requesting-a-change-github-issues) instead.
 
 ### For Developers:
 - Clone this repository to make code changes
@@ -359,7 +375,7 @@ Once your new site is live and working on your custom domain:
 
 For questions or issues:
 - **Content updates**: Contact your Contentful admin
-- **Technical issues**: Create an issue in this GitHub repository
+- **Bugs, typos, or change requests**: Open a GitHub Issue — see [🐞 Reporting a Problem or Requesting a Change](#-reporting-a-problem-or-requesting-a-change-github-issues) above
 
 ## 📄 License
 
