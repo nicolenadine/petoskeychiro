@@ -163,24 +163,30 @@
         document.getElementById('questionForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Get form data
-            const formData = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value,
-                question: document.getElementById('question').value
-            };
+            // Create a standard FormData object directly from the HTML form
+            const formData = new FormData(this);
             
-            // Here you would normally send the data to your server
-            // For now, we'll just show the success message
-            console.log('Form submitted:', formData);
-            
-            // Hide the form and show success message
-            document.getElementById('contactForm').style.display = 'none';
-            document.getElementById('successMessage').classList.add('show');
-            
-            // Scroll to top to show success message
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // Send data to your Cloudflare Worker URL in the background
+            fetch('https://github-form-handler.petoskeychiro.workers.dev/', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Hide the form and show success message smoothly
+                    document.getElementById('contactForm').style.display = 'none';
+                    document.getElementById('successMessage').classList.add('show');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                } else {
+                    alert('Something went wrong. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Could not connect to the mail server.');
+            });
         });
+
     </script>
 
     <footer class="footer">
