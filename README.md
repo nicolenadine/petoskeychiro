@@ -89,7 +89,73 @@ See these files for more information:
 - `docs/CONTENTFUL-CONTENT-MODEL.md` - Content structure
 - `docs/README-CONTENTFUL.md` - General Contentful information
 
-## ✏️ Making Code Changes
+## ✏️ Making Edits on GitHub.com (No Coding Experience Required)
+
+This section is for the marketing person or business owner who wants to make small edits — text, phone numbers, links, hours, etc. — directly through the GitHub website. No installs, no command line.
+
+You don't have direct push access to this repository, so the standard way to suggest a change is:
+
+1. **Fork** the repo — creates your own personal copy of it under your GitHub account.
+2. **Edit** the file(s) using GitHub's built-in web editor, right in your browser.
+3. **Open a Pull Request (PR)** — this asks the repo owner to review and merge your change into the live site.
+4. The owner reviews and merges the PR. Once merged, GitHub Pages automatically redeploys, and the change goes live within a couple of minutes.
+
+Nothing you do in your fork touches the live site until a PR is merged, so it's safe to experiment.
+
+### Step 1: Fork the repository
+
+1. Go to https://github.com/nicolenadine/petoskeychiro
+2. Click **Fork** in the top-right corner.
+3. Click **Create fork**. GitHub creates a copy at `github.com/YOUR-USERNAME/petoskeychiro`.
+
+You only need to do this once — reuse the same fork for future edits (see "Keeping your fork up to date" below).
+
+### Step 2: Edit a file
+
+1. In **your fork**, click into the file you want to change (e.g. `index.html`, `contact.html`, `faq.html`).
+2. Click the **pencil icon** ("Edit this file") in the top-right of the file view.
+3. Make your change in the text editor.
+   - If you're changing visible text (a sentence, phone number, hours, etc.), find that text and edit it carefully without disturbing the surrounding `<tags>`.
+   - Change only what you intend to. Adding or deleting a stray `<` or `>` can break the page layout.
+   - Use the **Preview** tab next to the editor to sanity-check the diff before committing.
+4. Scroll down to **"Commit changes"**:
+   - Write a short, descriptive message (e.g. "Update phone number on contact page").
+   - Select **"Create a new branch for this commit and start a pull request."**
+   - Click **Propose changes**.
+
+### Step 3: Open the pull request
+
+1. On the "Comparing changes" screen, confirm the base repository is `nicolenadine/petoskeychiro` and the base branch is `main`.
+2. Add a title and a short description of what changed and why.
+3. Click **Create pull request**.
+
+The change is now submitted for review — the live site is untouched until it's merged.
+
+### Step 4: Wait for review
+
+The repo owner reviews the PR, may leave comments, and merges it once it looks good. After merging into `main`, the site automatically redeploys (usually live within 1-2 minutes).
+
+### Editing multiple files at once
+
+To bundle several changes into one PR:
+- Make your first edit and choose "Create a new branch," as above.
+- For each additional file, edit it and choose **"Commit directly to `your-branch-name`"** instead of creating another new branch.
+- Open a single pull request once all the files are updated on that branch.
+
+### Keeping your fork up to date
+
+Before starting new edits, sync your fork so you're working from the latest version:
+
+1. Go to your fork on GitHub.
+2. Click **Sync fork** near the top of the file list, then **Update branch**.
+
+### Tips
+
+- Stick to small edits this way — text, links, contact info. For layout changes, new pages, or styling, loop in a developer.
+- Blog posts and team member bios don't go through this process — those are managed in Contentful (see above).
+- If a PR looks wrong, just close it without merging — nothing on the live site changes.
+
+## 👨‍💻 Making Code Changes (For Developers, Local Setup)
 
 ### To Update Design/Layout:
 
@@ -260,10 +326,9 @@ Once your new site is live and working on your custom domain:
 
 ## 👥 Team Workflow
 
-### For Marketing Managers:
-- Update content through the Contentful web interface
-- No technical knowledge required for content updates
-- Blog posts and team member changes go live immediately
+### For Marketing Managers / Business Owner:
+- Blog posts and team member profiles: update through the Contentful web interface — no technical knowledge required, changes go live immediately.
+- Small text edits to the site itself (phone numbers, hours, wording): use the fork → edit → pull request workflow described in [✏️ Making Edits on GitHub.com](#️-making-edits-on-githubcom-no-coding-experience-required) above. No installs needed, and nothing goes live until the PR is reviewed and merged.
 
 ### For Developers:
 - Clone this repository to make code changes
