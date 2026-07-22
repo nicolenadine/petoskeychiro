@@ -360,7 +360,6 @@ Once your new site is live and working on your custom domain:
 For questions or issues:
 - **Content updates**: Contact your Contentful admin
 - **Technical issues**: Create an issue in this GitHub repository
-- **Emergency**: [Add contact information]
 
 ## 📄 License
 
